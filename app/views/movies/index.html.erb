@@ -1,0 +1,39 @@
+<%=  link_to "Home Page", root_path%>
+
+<%= form_with url: movies_path, method: "get", local: true, class: "form-inline" do |form| %>
+<div>
+  <%= form.select :actor_id, Actor.all.map {|p| [ p.name, p.id ] }, {:include_blank => 'All Actor', :selected => params[:actor_id] }, class: "form-control" %>
+  <%= form.submit "Search", class: "btn btn-outline-danger" %>
+</div>
+<% end -%>
+
+<% if @movies.present? %>
+  <table class="table table-striped custom-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Avg Rating</th>
+        <th>Description</th>
+        <th>Year</th>
+        <th>Actors</th>
+        <th>Director</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @movies.each do |movie| %>
+        <tr>
+          <td><%= movie.id %></td>
+          <td><%= movie.name %></td>
+          <td><%= movie.avg_rating %></td>
+          <td><%= movie.description %></td>
+          <td><%= movie.year %></td>
+          <td><%= movie.actors_name %></td>
+          <td><%= movie.director_name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <%= "No Movie Present" %>
+<% end %>

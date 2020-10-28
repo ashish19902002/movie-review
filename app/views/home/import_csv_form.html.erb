@@ -1,0 +1,8 @@
+<%= form_with url: import_csv_path(type: params[:type]), method: "post", local: true, class: "form-inline" do |form| %>
+<div class="col">
+  <%= form.file_field :file, class: "form-control", placeholder: "Upload file" %>
+</div>
+<div class="col">
+  <%= form.submit "Import CSV", class: "btn btn-outline-danger" %>
+</div>
+<% end -%>
